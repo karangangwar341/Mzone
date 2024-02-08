@@ -5,7 +5,7 @@ export default class Popularartist extends Component {
   render() {
     return (
       <div className='mt-5 '>
-        <h1 className='text-xl text-left text-white/80 mb-2 px-6'>Popular Artists</h1>
+        <h1 className='text-xl text-left text-white/80 mb-2'>Popular Artists</h1>
         <div className='flex flex-row justify-evenly'>
             <Popularartistcard/>
             <Popularartistcard/>
