@@ -11,7 +11,7 @@ export default class Queuecard extends Component {
               : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY-lM3ktguFHXGQ1NsoIgFeT8_qVQPT6yw9aiv3JXyvQ&s"
           }
           alt="album"
-          className="w-12 h-12 shadow-xl rounded-md"
+          className="w-12 h-12 shadow-xl rounded-md ml-1"
         />
         <div>
         <h2 className="pt-1"><b>{this.props.title ? this.props.title : "Untitled"}</b></h2>

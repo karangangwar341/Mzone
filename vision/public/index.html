@@ -26,12 +26,37 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>mzone</title>
+    <style>
+      /* Make the body take up the full viewport height */
+      body {
+          margin:  0;
+          height:  100vh;
+          overflow: hidden;
+      }
+
+      /* Position the video element absolutely and cover the entire body */
+      video#background-video {
+          position: fixed;
+          right:  0;
+          bottom:  0;
+          min-width:  100%;
+          min-height:  100%;
+          z-index: -1;
+      }
+
+      /* Content container */
+      .content {
+          position: relative;
+          z-index:  1;
+          /* Other styling for your content */
+      }
+  </style>
   </head>
-  <body
-    style="
-      background-image: radial-gradient(circle at center, #172651, #010101);
-    "
-  >
+  <body>
+    <video id="background-video" autoplay loop muted playsinline>
+      <source src="bg-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>

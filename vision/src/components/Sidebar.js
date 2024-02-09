@@ -4,7 +4,7 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div className="h-screen p-2  w-1/5 items-center">
-        <aside className="Sidebar m-1 fixed w-1/6 h-fit flex flex-col bg-sidebarc/20 text-center text-white pt-6 pb-2 px-2 rounded-3xl transition-transform ">
+        <aside className="Sidebar m-1 fixed w-1/6 pr-2 h-fit flex flex-col bg-sidebarc/20 text-center text-white pt-6 pb-2 pl-2 rounded-3xl transition-transform ">
           <div className="flex flex-col items-center justify-start flex-grow">
             <h1 className="font-semibold text-3xl text-white/80 mb-16 top-2 hover:scale-110 transition-transform">
               mzone
