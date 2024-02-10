@@ -6,12 +6,12 @@ import Right from './Right'
 export default class Homee extends Component {
   render() {
     return (
-        <div className="App flex flex-row justify-center">
+        < >
 <Sidebar/>
 <Right/>
 <SidebarR/>
 
-</div>
+</>
     )
   }
 }
