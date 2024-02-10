@@ -23,7 +23,7 @@ export default class Sidebar extends Component {
                 Notifications
               </button>
               <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
-                Premium content
+                Choose background
               </button>
             </nav>
           </div >
