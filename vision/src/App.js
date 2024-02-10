@@ -7,10 +7,10 @@ import SidebarR from './components/SidebarR';
 function App() {
   return (
     <div className="App flex flex-row justify-center">
-         <Sidebar/>
+         {/* <Sidebar/>
          <Right/>
-         <SidebarR/>
-         {/* <Login/> */}
+         <SidebarR/> */}
+         <Login/>
     </div>
   );
 }
