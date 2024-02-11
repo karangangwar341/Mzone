@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from ".././firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from ".././firebase";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -45,6 +45,17 @@ const Login = () => {
       });
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      console.log("Google Sign-In Successful", user);
+      navigate('/profile', { replace: true });
+    } catch (error) {
+      console.error("Google Sign-In Error", error);
+    }
+  };
+
   return (
     <div className="w-screen h-screen flex justify-center items-center">
       <div className="w-72 h-72 bg-white/10 rounded-2xl shadow-xl shadow-white/30">
@@ -71,11 +82,8 @@ const Login = () => {
           </button>
         </form>
         <div className="w-full my-3 p-1 rounded">
-          <button className="bg-white/40 text-white px-8 my-1 rounded-xl text-sm py-1 hover:bg-texthover/40 border-1 hover:scale-105 transition-transform">
+          <button onClick={handleGoogleSignIn} className="bg-white/40 text-white px-8 my-1 rounded-xl text-sm py-1 hover:bg-texthover/40 border-1 hover:scale-105 transition-transform">
             Continue with Google
-          </button>
-          <button className="bg-white/40 text-white px-8 rounded-xl text-sm py-1 hover:bg-texthover/40 border-1 hover:scale-105 transition-transform">
-            Continue with Facebook
           </button>
         </div>
         <button className="text-white hover:text-white hover:scale-110" onClick={handleClick}>New Here?</button>

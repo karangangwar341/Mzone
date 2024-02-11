@@ -1,7 +1,8 @@
 import React, { Component,useState } from 'react'
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from ".././firebase";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, database, googleProvider } from ".././firebase";
 import { useNavigate } from "react-router-dom";
+
 
 const Signup =()=>  {
     const [email, setEmail] = useState('');
@@ -45,8 +46,19 @@ const Signup =()=>  {
         }
          createUserWithEmailAndPassword(auth, email, password).then((res =>{
             alert('Sign In Successfull!!!')
-            navigate('/home');
+            navigate('/profile', { replace: true });
          }))
+    };
+
+    const handleGoogleSignIn = async () => {
+      try {
+        const result = await signInWithPopup(auth, googleProvider);
+        const user = result.user;
+        console.log("Google Sign-In Successful", user);
+        navigate('/profile', { replace: true });
+      } catch (error) {
+        console.error("Google Sign-In Error", error);
+      }
     };
 
     return (
@@ -85,7 +97,7 @@ const Signup =()=>  {
             <button className="text-white/60 hover:text-white hover:scale-110">Signup</button>
           </form>
           <div className="w-full  my-3 p-1 rounded">
-            <button className="bg-white/40 text-white px-8 my-1 rounded-xl text-sm py-1 hover:bg-texthover/40 border-1 hover:scale-105 transition-transform">Signup with google</button>
+            <button onClick={handleGoogleSignIn} className="bg-white/40 text-white px-8 my-1 rounded-xl text-sm py-1 hover:bg-texthover/40 border-1 hover:scale-105 transition-transform">Signup with google</button>
             <button onClick={handleClick} className="bg-white/40 text-white px-8 rounded-xl text-sm py-1 hover:bg-texthover/40 border-1 hover:scale-105 transition-transform">have account? sign in</button>
         
           </div>

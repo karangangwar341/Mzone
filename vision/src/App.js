@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Homee from './components/Homee';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import Profile from './components/Profile';
 import Right from './components/Right';
 import Sidebar from './components/Sidebar';
 import SidebarR from './components/SidebarR';
@@ -15,6 +16,8 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/home" element={<Homee />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/profile" element={<Profile />} />
+          
         </Routes>
       </Router>
     </div>
