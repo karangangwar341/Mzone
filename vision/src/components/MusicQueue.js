@@ -6,7 +6,7 @@ export default class MusicQueue extends Component {
     return (
       <div className='mt-8'>
         <h1 className='text-xl text-left text-white/80 mb-2 '>Next in queue</h1>
-        <div className='h-52 overflow-auto rounded-lg shadow-md' style={{
+        <div className='h-52 overflow-auto rounded-lg shadow-md' style={{height: '40vh', 
           '--scrollbar-bg': '#ffffff', // Replace with your background color
           '--scrollbar-thumb': '#cccccc', // Replace with your thumb color
           scrollbarWidth: 'none', // For Firefox

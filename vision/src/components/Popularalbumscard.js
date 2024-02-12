@@ -3,14 +3,14 @@ import React, { Component } from "react";
 export default class Popularalbumscard extends Component {
   render() {
     return (
-      <div className="rounded-xl bg-white/20  mx-2 px-3 py-1 just ">
+      <div className="rounded-xl bg-white/20  m-1 px-3 py-1 just ">
         <img
           src={
             this.props.image
               ? this.props.image
               : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_1L0wWKY4jt6CEa80TQ2H8ffRP-AAsyOfgR36xjc6ZQ&s"
           }
-          className="rounded-lg w-36 h-36"
+          className="rounded-lg w-36 h-32"
           alt="image"
         />
         <h4 className="text-sm text-left text-white/80 font-medium ">

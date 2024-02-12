@@ -4,7 +4,7 @@ export default class Sidebar extends Component {
   render() {
     return (
       <div className="h-screen p-2  w-1/5 items-center">
-        <aside className="Sidebar m-1 fixed w-1/6 pr-2 h-fit flex flex-col bg-sidebarc/20 text-center text-white pt-6 pb-2 pl-2 rounded-3xl transition-transform ">
+        <aside className="Sidebar m-1 fixed w-1/6 pr-2  flex flex-col bg-sidebarc/20 text-center text-white pt-6 pb-2 pl-2 rounded-3xl transition-transform " style={{height: '95vh', }}>
           <div className="flex flex-col items-center justify-start flex-grow">
             <h1 className="font-semibold text-3xl text-white/80 mb-16 top-2 hover:scale-110 transition-transform">
               mzone
@@ -27,7 +27,7 @@ export default class Sidebar extends Component {
               </button>
             </nav>
           </div >
-          <div className="mt-44">
+          <div className="mt-auto">
             <p className="text-xs text-yellow p-2 underline">
               dowmload app now
             </p>

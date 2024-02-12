@@ -6,7 +6,7 @@ export default class Recents extends Component {
     return (
         <div className='mt-6 mb-2'>
         <h1 className='text-xl text-left text-white/80 mb-2 '>Recents</h1>
-        <div className='h-44 overflow-auto rounded-lg shadow-md' style={{
+        <div className=' overflow-auto rounded-lg shadow-md' style={{height: '30vh', 
           '--scrollbar-bg': '#ffffff', // Replace with your background color
           '--scrollbar-thumb': '#cccccc', // Replace with your thumb color
           scrollbarWidth: 'none', // For Firefox
@@ -19,6 +19,9 @@ export default class Recents extends Component {
             background: 'var(--scrollbar-thumb)'
           }
         }}>
+         <Recentcard/>
+         <Recentcard/>
+         <Recentcard/>
          <Recentcard/>
          <Recentcard/>
          <Recentcard/>
