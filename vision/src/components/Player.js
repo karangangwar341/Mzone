@@ -5,20 +5,22 @@ const Player = ({ audios }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
   const audioRef = useRef();
 
   const nextSong = () => {
     setCurrentSongIndex((prevIndex) => {
-      let nextIndex = prevIndex +  1;
-      if (nextIndex >= audios.length) nextIndex =  0;
+      let nextIndex = prevIndex + 1;
+      if (nextIndex >= audios.length) nextIndex = 0;
       return nextIndex;
     });
   };
 
   const prevSong = () => {
     setCurrentSongIndex((prevIndex) => {
-      let nextIndex = prevIndex -  1;
-      if (nextIndex <  0) nextIndex = audios.length -  1;
+      let nextIndex = prevIndex - 1;
+      if (nextIndex < 0) nextIndex = audios.length - 1;
       return nextIndex;
     });
   };
@@ -44,7 +46,21 @@ const Player = ({ audios }) => {
   };
 
   const handleEnded = () => {
-    nextSong();
+    if (isLooping) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    } else {
+      nextSong();
+    }
+  };
+
+  const toggleMute = () => {
+    audioRef.current.muted = !audioRef.current.muted;
+    setIsMuted(audioRef.current.muted);
+  };
+
+  const toggleLoop = () => {
+    setIsLooping(!isLooping);
   };
 
   useEffect(() => {
@@ -63,10 +79,14 @@ const Player = ({ audios }) => {
     };
   }, []);
 
+  useEffect(() => {
+    audioRef.current.loop = isLooping;
+  }, [isLooping]);
+
   return (
-    <div className='text-white bg-white/10 mt-1 p-2 rounded-xl'>
+    <div className='text-white bg-white/10 mt-1 p-2 rounded-xl text-xs'>
       <audio ref={audioRef} />
-      <input 
+      <input
         type="range"
         min="0"
         max={duration}
@@ -75,41 +95,59 @@ const Player = ({ audios }) => {
         onChange={handleSeekUpdate}
         className="slider w-full "
       />
-          
 
       <p>{audios[currentSongIndex].artist} - {audios[currentSongIndex].title}</p>
-     
-       <div className="flex justify-between"> 
-      <img src={audios[currentSongIndex].imgurl} className='w-12 h-12 rounded-2xl'/>
-      <div className='py-2'>
-      <button
-        className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-        onClick={togglePlayPause}
-      >
-        {isPlaying ? 'Pause' : 'Play'}
-      </button>
-      <button
-        className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-        onClick={nextSong}
-      >
-        Next
-      </button>
-      <button
-        className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-        onClick={prevSong}
-      >
-        Previous
-      </button>
+
+      <div className="flex justify-between">
+        <img src={audios[currentSongIndex].imgurl} className='w-12 h-12 rounded-2xl'/>
+        <div className='py-2'>
+          <button
+            className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={togglePlayPause}
+          >
+            {isPlaying ? 'Pause' : 'Play'}
+          </button>
+          <button
+            className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={nextSong}
+          >
+            Next
+          </button>
+          <button
+            className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={prevSong}
+          >
+            Previous
+          </button>
+          <button
+            className={`border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${isLooping ? 'bg-green-500' : ''}`}
+            onClick={toggleLoop}
+          >
+           {isLooping ? 'unloop' : 'loop'}
+          </button>
+          <button
+            className={`border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${isMuted ? 'bg-red-500' : ''}`}
+            onClick={toggleMute}
+          >
+            {isMuted ? 'Unmute' : 'Mute'}
+          </button>
+          {/* Add a button for liking the song */}
+          <button
+            className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={() => console.log('Like song')}
+          >
+            Like
+          </button>
+        </div>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          onChange={handleVolumeChange}
+          className="slider"
+        />
       </div>
-      <input
-        type="range"
-        min="0"
-        max="1"
-        step="0.01"
-        onChange={handleVolumeChange}
-        className="slider"
-      />
-       </div>
     </div>
   );
 };
