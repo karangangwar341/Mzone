@@ -50,7 +50,7 @@ const Login = () => {
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       console.log("Google Sign-In Successful", user);
-      navigate('/profile', { replace: true });
+      navigate('/home', { replace: true });
     } catch (error) {
       console.error("Google Sign-In Error", error);
     }
