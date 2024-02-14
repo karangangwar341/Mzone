@@ -40,7 +40,7 @@ const Signup =()=>  {
             alert('Please enter the confirm password.');
             return;
         }
-        else if (password.trim() != cnfpassword.trim()){
+        else if (password.trim() !== cnfpassword.trim()){
             alert('Password and Confirm password should be same.');
             return; 
         }

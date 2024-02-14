@@ -71,6 +71,9 @@ const Sidebar = () => {
       console.error('Error logging out:', error);
     }
   };
+  const handleNavigate = () => {
+    navigate('/music');
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -95,8 +98,8 @@ const Sidebar = () => {
               <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
                 Notifications
               </button>
-              <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
-                Choose background
+              <button onClick={handleNavigate} className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+                Upload Your Music
               </button>
               <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
                 Settings

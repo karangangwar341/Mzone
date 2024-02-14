@@ -4,6 +4,7 @@ import Homee from './components/Homee';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Profile from './components/Profile';
+import Altu from './components/Altu';
 import Right from './components/Right';
 import Sidebar from './components/Sidebar';
 import SidebarR from './components/SidebarR';
@@ -17,6 +18,7 @@ function App() {
           <Route path="/home" element={<Homee />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/music" element={<Altu />} />
           
         </Routes>
       </Router>
