@@ -34,7 +34,7 @@ export default class Right extends Component {
           }
         }}>
     <Categories/>
-    <Home/>
+    <Home homecontent ={this.props.homecontent} />
   </div>
   <Player audios={audios} />
 </div>

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Popularalbumscard extends Component {
   render() {
     return (
-      <div className="rounded-xl bg-white/20  m-1 px-3 py-1 just ">
+      <div className="rounded-xl bg-white/10 hover:bg-white/20 focus:bg-white/30  m-1 px-3 py-1 just ">
         <img
           src={
             this.props.image

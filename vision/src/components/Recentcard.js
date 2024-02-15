@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Recentcard extends Component {
   render() {
     return (
-      <div className=" flex flex-row bg-white/20 text-white/80 rounded-md justify-between py-1 mr-2 mb-2 text-xs">
+      <div className=" flex flex-row bg-white/10 hover:bg-white/20 focus:bg-white/30 text-white/80 rounded-md justify-between py-1 mr-2 mb-2 text-xs">
         <img
           src={
             this.props.image

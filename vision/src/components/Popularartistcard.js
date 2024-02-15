@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Popularartistcard extends Component {
   render() {
     return (
-      <div className="w-26 p-2">
+      <div className="w-26 bg-white/10 hover:bg-white/20 focus:bg-white/30 m-1 rounded-2xl p-1">
         <img
           src="https://media.istockphoto.com/id/994318634/photo/young-hipster-african-american-rapper-recording-songs-in-music-recording-studio.jpg?s=612x612&w=0&k=20&c=A2iXa5XXStfOQ9477mTTjMc6ml6cCkrPn4Kr9oqECg8="
           alt=""

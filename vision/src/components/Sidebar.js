@@ -71,22 +71,25 @@ const Sidebar = () => {
       console.error('Error logging out:', error);
     }
   };
-  const handleNavigate = () => {
+  const handleNavigatemusic = () => {
     navigate('/music');
+  };
+  const handleNavigatehome = () => {
+    navigate('/home');
   };
 
   if (loading) {
     return <p>Loading...</p>;
   }
     return (
-      <div className="h-screen p-2  w-1/5 items-center">
-        <aside className="Sidebar m-1 fixed w-1/6 pr-2  flex flex-col bg-sidebarc/20 text-center text-white pt-6 pb-2 pl-2 rounded-3xl transition-transform " style={{height: '95vh', }}>
+      <div className="h-screen px-1 w-1/5 items-center">
+        <aside className="Sidebar m-1 fixed w-1/6 pr-2  flex flex-col bg-sidebarc/20 text-center text-white pt-6 pb-2 pl-2 rounded-3xl transition-transform " style={{height: '99vh', }}>
           <div className="flex flex-col items-center justify-start flex-grow">
             <h1 className="font-semibold text-3xl text-white/80 mb-16 top-2 hover:scale-110 transition-transform">
               mzone
             </h1>
             <nav className="flex flex-col space-y-2">
-              <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+              <button onClick={handleNavigatehome} className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
                 Home
               </button>
               <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
@@ -98,7 +101,7 @@ const Sidebar = () => {
               <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
                 Notifications
               </button>
-              <button onClick={handleNavigate} className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+              <button onClick={handleNavigatemusic} className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
                 Upload Your Music
               </button>
               <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">

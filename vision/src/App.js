@@ -15,10 +15,10 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Homee />} />
+          <Route path="/home" element={<Homee homecontent="Home" />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/music" element={<Altu />} />
+          <Route path="/music" element={<Homee homecontent= "Music" />} />
           
         </Routes>
       </Router>
