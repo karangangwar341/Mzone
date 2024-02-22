@@ -8,7 +8,7 @@ export default class Homee extends Component {
     return (
         < >
 <Sidebar/>
-<Right/>
+<Right homecontent={this.props.homecontent}/>
 <SidebarR/>
 
 </>

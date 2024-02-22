@@ -1,8 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { database } from '.././firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import React, { useState, useRef, useEffect } from "react";
+import { database } from ".././firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { CgPlayPause } from "react-icons/cg";
+import { GoUnmute } from "react-icons/go";
+import { FaHeart, FaPause, FaPlay } from "react-icons/fa";
+import { IoVolumeMute } from "react-icons/io5";
+import { ImLoop, ImNext, ImNext2, ImPrevious } from "react-icons/im";
+import { BsRepeat, BsRepeat1 } from "react-icons/bs";
 
-const userRef = collection(database, 'musicdata');
+const userRef = collection(database, "musicdata");
 
 const Player = () => {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
@@ -25,14 +31,14 @@ const Player = () => {
         }));
         setMusicData(data);
       } catch (error) {
-        console.error('Error getting documents: ', error);
+        console.error("Error getting documents: ", error);
       }
     };
 
     fetchData();
   }, []);
   //
-  console.log(musicData);
+  // console.log(musicData);
 
   const nextSong = () => {
     setCurrentSongIndex((prevIndex) => {
@@ -91,9 +97,9 @@ const Player = () => {
   useEffect(() => {
     audioRef.current.src = musicData[currentSongIndex]?.songlink;
     if (isPlaying) audioRef.current.play();
-    audioRef.current.addEventListener('ended', handleEnded);
+    audioRef.current.addEventListener("ended", handleEnded);
     return () => {
-      audioRef.current.removeEventListener('ended', handleEnded);
+      audioRef.current.removeEventListener("ended", handleEnded);
     };
   }, [currentSongIndex, isPlaying]);
 
@@ -109,7 +115,7 @@ const Player = () => {
   }, [isLooping]);
 
   return (
-    <div className='text-white bg-white/10 mt-1 p-2 rounded-xl text-xs'>
+    <div className="text-white bg-white/10 mt-1 p-2 rounded-xl text-xs">
       <audio ref={audioRef} />
       <input
         type="range"
@@ -121,48 +127,69 @@ const Player = () => {
         className="slider w-full "
       />
 
-      <p>{musicData[currentSongIndex]?.artist} - {musicData[currentSongIndex]?.title}</p>
+      <p>
+        {musicData[currentSongIndex]?.artist} -{" "}
+        {musicData[currentSongIndex]?.title}
+      </p>
 
       <div className="flex justify-between">
-        <img src={musicData[currentSongIndex]?.thumbnail} className='w-12 h-12 rounded-2xl'/>
-        <div className='py-2'>
-          <button
-            className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-            onClick={togglePlayPause}
+        <img
+          src={musicData[currentSongIndex]?.thumbnail}
+          className="w-12 h-12 rounded-2xl"
+        />
+        <div className="py-2">
+        <button
+            className=" px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={() => console.log("Like song")}
           >
-            {isPlaying ? 'Pause' : 'Play'}
+            <FaHeart size="1.3rem" />
           </button>
-          <button
-            className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-            onClick={nextSong}
-          >
-            Next
-          </button>
-          <button
-            className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-            onClick={prevSong}
-          >
-            Previous
-          </button>
-          <button
-            className={`border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${isLooping ? 'bg-green-500' : ''}`}
+        <button
+            className={` px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${
+              isLooping ? "bg-green-500" : ""
+            }`}
             onClick={toggleLoop}
           >
-           {isLooping ? 'unloop' : 'loop'}
+            {isLooping ? (
+              <BsRepeat1 size="1.3rem" />
+            ) : (
+              <BsRepeat size="1.3rem" />
+            )}
           </button>
           <button
-            className={`border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${isMuted ? 'bg-red-500' : ''}`}
+            className=" px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={prevSong}
+          >
+            <ImPrevious size="1.3rem" />
+          </button>
+          <button
+            className=" px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={togglePlayPause}
+          >
+            {isPlaying ? <FaPause size="1.3rem" /> : <FaPlay size="1.3rem" />}
+          </button>
+          <button
+            className=" px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={nextSong}
+          >
+            <ImNext size="1.3rem" />
+          </button>
+
+          
+          <button
+            className={` px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${
+              isMuted ? "bg-red-500" : ""
+            }`}
             onClick={toggleMute}
           >
-            {isMuted ? 'Unmute' : 'Mute'}
+            {isMuted ? (
+              <GoUnmute size="1.3rem" />
+            ) : (
+              <IoVolumeMute size="1.3rem" />
+            )}
           </button>
           {/* Add a button for liking the song */}
-          <button
-            className="border-2 border-white/60 px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-            onClick={() => console.log('Like song')}
-          >
-            Like
-          </button>
+          
         </div>
         <input
           type="range"

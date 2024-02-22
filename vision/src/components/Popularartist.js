@@ -1,22 +1,44 @@
-import React, { Component } from 'react'
-import Popularartistcard from './Popularartistcard'
+import React, { useState, Component } from "react";
+import Popularartistcard from "./Popularartistcard";
+const Popularartist = () => {
+  const [popularArtists, setPopularArtists] = useState([]);
+  return (
+    <div className="mt-5 ">
+      <h1 className="text-xl text-left text-white/80 ">Popular Artists</h1>
+      <div
+        className="flex flex-wrap justify-start overflow-y-scroll"
+        style={{
+          height: "40vh",
+          "--scrollbar-bg": "#ffffff", // Replace with your background color
+          "--scrollbar-thumb": "#cccccc", // Replace with your thumb color
+          scrollbarWidth: "none", // For Firefox
+          msOverflowStyle: "none", // For Internet Explorer and Edge
+          "&::-webkit-scrollbar": {
+            // For Chrome, Safari, and Opera
+            width: "0px",
+            background: "var(--scrollbar-bg)",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "var(--scrollbar-thumb)",
+          },
+        }}
+      >
+        <Popularartistcard  />
+        <Popularartistcard />
+        <Popularartistcard />
 
-export default class Popularartist extends Component {
-  render() {
-    return (
-      <div className='mt-5 '>
-        <h1 className='text-xl text-left text-white/80 '>Popular Artists</h1>
-        <div className='flex flex-row justify-evenly'>
-            <Popularartistcard/>
-            <Popularartistcard/>
-            <Popularartistcard/>
-        </div>
-        <div className='flex flex-row justify-evenly'>
-            <Popularartistcard/>
-            <Popularartistcard/>
-            <Popularartistcard/>
-        </div>
+        <Popularartistcard />
+        <Popularartistcard />
+        <Popularartistcard />
+        <Popularartistcard />
+        <Popularartistcard />
+        <Popularartistcard />
+
+        <Popularartistcard />
+        <Popularartistcard />
+        <Popularartistcard />
       </div>
-    )
-  }
-}
+    </div>
+  );
+};
+export default Popularartist;

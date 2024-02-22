@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { auth, database, storage } from '../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
+import { FaUpload } from 'react-icons/fa';
 
 const userRef = collection(database, 'musicdata');
 
@@ -89,7 +90,7 @@ class Altu extends Component {
     const { title, genre, artist } = this.state;
 
     return (
-      <div className=" mx-auto w-full m-3 rounded-xl bg-white/10 p-6">
+      <div className=" mx-auto w-full m-3 rounded-xl bg-white/10 p-6 shadow-inner">
         <h2 className="text-3xl font-bold text-center pb-4 text-white">
           Upload your favorite music
         </h2>
@@ -125,6 +126,9 @@ class Altu extends Component {
               onChange={this.handleInputChange}
               className="mt-1 block w-full rounded-xl pl-3 py-2 text-sm text-white bg-white/10 hover:shadow-sm hover:shadow-white focus:shadow-md focus:shadow-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
+              <option className="text-black" value="pop">
+                Select
+              </option>
               <option className="text-black" value="pop">
                 Pop
               </option>
@@ -167,7 +171,7 @@ class Altu extends Component {
             />
           </div>
           <div className="flex">
-            <div className="flex mx-3">
+            <div className="flex mx-1">
               <label
                 htmlFor="thumbnail"
                 className="block text-lg  p-2 font-medium text-white/80 w-36 rounded-md"
@@ -181,10 +185,10 @@ class Altu extends Component {
                 className="mt-1 block w-full rounded-xl bg-gray-800/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
-            <div className="flex mx-3">
+            <div className="flex mx-1">
               <label
                 htmlFor="song"
-                className="block text-lg  p-2 font-medium text-white/80 w-36 rounded-md"
+                className="block text-lg  p-2 font-medium text-white/80 w-16 rounded-md"
               >
                 Song
               </label>
@@ -200,9 +204,9 @@ class Altu extends Component {
             <button
             type="button" 
             onClick={this.uploadMusic}
-            className="text-gray-900 hover:bg-white/20 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-xs px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-          >
-            Upload music
+            className="text-gray-900 hover:bg-white/20 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-xl bg-white/10 text-xs px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+            >
+           <FaUpload size='1.1rem'/>
           </button>
             </div>
 
@@ -212,7 +216,7 @@ class Altu extends Component {
             onClick={this.handleReadyToGo}
             className="text-gray-900 hover:bg-white/20 border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-full text-xs px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
           >
-            Upload
+            Submit
           </button>
         </div>
       </div>
