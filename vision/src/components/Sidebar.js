@@ -83,6 +83,9 @@ const Sidebar = () => {
   const handleNavigatehome = () => {
     navigate('/home');
   };
+  const handleNavigatesearch = () => {
+    navigate('/search');
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -98,7 +101,7 @@ const Sidebar = () => {
               <button onClick={handleNavigatehome} className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover  hover:scale-105 transition-transform rounded-lg p-2">
              <div className='pt-2'> <ImHome /></div> <div className='py-1 px-2'>Home</div>
               </button>
-              <button className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+              <button onClick={handleNavigatesearch} className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
               <div className='pt-2'> <FaSearch /></div> <div className='py-1 px-2'>Search</div>
               </button>
               <button className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">

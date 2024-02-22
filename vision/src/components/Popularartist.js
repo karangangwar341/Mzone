@@ -3,12 +3,12 @@ import Popularartistcard from "./Popularartistcard";
 const Popularartist = () => {
   const [popularArtists, setPopularArtists] = useState([]);
   return (
-    <div className="mt-5 ">
+    <div className="mt-2 ">
       <h1 className="text-xl text-left text-white/80 ">Popular Artists</h1>
       <div
         className="flex flex-wrap justify-start overflow-y-scroll"
         style={{
-          height: "40vh",
+          height: "55vh",
           "--scrollbar-bg": "#ffffff", // Replace with your background color
           "--scrollbar-thumb": "#cccccc", // Replace with your thumb color
           scrollbarWidth: "none", // For Firefox

@@ -7,8 +7,7 @@ import MusicQueue from "./MusicQueue";
 export default class SidebarR extends Component {
   render() {
     return (
-        <div className=" justify-items-center mt-3 w-1/4 ml-2 py-1" style={{height: '98vh', }}>
-        <Search/>
+        <div className=" justify-items-center mt-1 w-1/4 ml-2 py-1" style={{height: '98vh', }}>
         <Popularartist/>
         <MusicQueue/>
       </div>
