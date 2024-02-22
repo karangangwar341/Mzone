@@ -19,7 +19,6 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/music" element={<Homee homecontent= "Music" />} />
-          
         </Routes>
       </Router>
     </div>

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import { ImCancelCircle } from "react-icons/im";
 
 export default class Queuecard extends Component {
   render() {
     return (
-      <div className=" flex flex-row bg-white/10 hover:bg-white/20 focus:bg-white/30 text-white/80 rounded-md justify-between py-1 mr-2 mb-2 text-xs">
+      <div className=" flex flex-row bg-white/10 hover:bg-white/20  focus:bg-white/30 text-white/80 rounded-md justify-between py-1 mr-2 mb-2 text-xs">
         <img
           src={
             this.props.image
@@ -22,7 +23,7 @@ export default class Queuecard extends Component {
           className="text-xl  text-white/70 hover:text-white pl-3 pr-3"
           onClick={() => this.props.removeFromQueue(this.props.id)}
         >
-          <b>x</b>
+          <ImCancelCircle/>
         </button>
       </div>
     );

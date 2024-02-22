@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { FaHeart } from 'react-icons/fa'
 
 export default class Recentcard extends Component {
   render() {
@@ -13,7 +14,7 @@ export default class Recentcard extends Component {
           alt="album"
           className="w-12 h-12 shadow-xl rounded-md ml-1"
         />
-        <div>
+        <div className=' px-2'>
         <h2 className="pt-1"><b>{this.props.title ? this.props.title : "Untitled"}</b></h2>
         <p className="">{this.props.artist ? this.props.artist : "Unknown Artist"} - </p>
         </div>
@@ -22,7 +23,7 @@ export default class Recentcard extends Component {
           className="text-xs  text-white/70 hover:text-white pl-3 pr-3"
           onClick={() => this.props.removeFromQueue(this.props.id)}
         >
-          <b>like</b>
+          <FaHeart size='1.3rem'/>
         </button>
       </div>
     )

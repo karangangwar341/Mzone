@@ -2,7 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { auth, database } from '.././firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-
+import { ImHome } from "react-icons/im";
+import { FaSearch } from "react-icons/fa";
+import { IoIosNotifications } from "react-icons/io";
+import { BiSolidPlaylist } from "react-icons/bi";
+import { IoSettings } from "react-icons/io5";
+import { MdLogout } from "react-icons/md";
+import { FaUpload } from "react-icons/fa";
 const Sidebar = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -82,33 +88,33 @@ const Sidebar = () => {
     return <p>Loading...</p>;
   }
     return (
-      <div className="h-screen px-1 w-1/5 items-center">
-        <aside className="Sidebar m-1 fixed w-1/6 pr-2  flex flex-col bg-sidebarc/20 text-center text-white pt-6 pb-2 pl-2 rounded-3xl transition-transform " style={{height: '99vh', }}>
+      <div className="h-screen items-center " style={{width: '26vh' }}>
+        <aside className="Sidebar m-1 fixed  pr-2  flex flex-col bg-sidebarc/20 text-center text-white pt-6 pb-2 pl-2 rounded-3xl transition-transform " style={{height: '99vh', width: '24vh' }}>
           <div className="flex flex-col items-center justify-start flex-grow">
             <h1 className="font-semibold text-3xl text-white/80 mb-16 top-2 hover:scale-110 transition-transform">
               mzone
             </h1>
             <nav className="flex flex-col space-y-2">
-              <button onClick={handleNavigatehome} className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
-                Home
+              <button onClick={handleNavigatehome} className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover  hover:scale-105 transition-transform rounded-lg p-2">
+             <div className='pt-2'> <ImHome /></div> <div className='py-1 px-2'>Home</div>
               </button>
-              <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
-                Search
+              <button className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+              <div className='pt-2'> <FaSearch /></div> <div className='py-1 px-2'>Search</div>
               </button>
-              <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
-                Playlist
+              <button className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+              <div className='pt-2'> <BiSolidPlaylist /></div> <div className='py-1 px-2'>Playlists</div>
               </button>
-              <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
-                Notifications
+              {/* <button className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+              <div className='pt-2'> <IoIosNotifications /></div> <div className='py-1 px-2'>Notifications</div>
+              </button> */}
+              <button onClick={handleNavigatemusic} className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+              <div className='pt-2'> <FaUpload /></div> <div className='py-1 px-2'>Upload</div>
               </button>
-              <button onClick={handleNavigatemusic} className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
-                Upload Your Music
+              <button className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+              <div className='pt-2'> <IoSettings /></div> <div className='py-1 px-2'>Settings</div>
               </button>
-              <button className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
-                Settings
-              </button>
-              <button onClick={ handleLogout } className="w-full text-white/80 hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
-                log out
+              <button onClick={ handleLogout } className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+                <div className='pt-2'> <MdLogout /></div> <div className='py-1 px-2'>Logout</div>
               </button>
             </nav>
           </div >
