@@ -1,8 +1,8 @@
 import React from 'react';
 import Popularalbums from './Popularalbums';
 import Recents from './Recents';
-import Altu from './Altu';
-import SearchScreen from './SearchScreen';
+import Altu from '../Player/Altu';
+import SearchScreen from '../SearchScreen';
 
 const Home = ({ homecontent }) => {
   return (

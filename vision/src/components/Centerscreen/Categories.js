@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import Button1 from './Button1'
+import Button1 from '../Button1'
 
 export default class Categories extends Component {
   render() {

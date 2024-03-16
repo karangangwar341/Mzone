@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { database } from ".././firebase";
+import { database } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { CgPlayPause } from "react-icons/cg";
 import { GoUnmute } from "react-icons/go";

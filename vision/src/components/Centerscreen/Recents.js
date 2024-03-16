@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Recentcard from './Recentcard'
+import Recentcard from '../cards/Recentcard'
 
 export default class Recents extends Component {
   render() {

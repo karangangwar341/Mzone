@@ -1,13 +1,10 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Homee from './components/Homee';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Profile from './components/Profile';
-import Altu from './components/Altu';
-import Right from './components/Right';
-import Sidebar from './components/Sidebar';
-import SidebarR from './components/SidebarR';
+import Login from './components/Login/signup/Login';
+import Signup from './components/Login/signup/Signup';
+import Profile from './components/Login/signup/Profile';
+
 
 function App() {
   return (

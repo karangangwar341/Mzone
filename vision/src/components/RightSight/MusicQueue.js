@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Queuecard from './Queuecard';
+import Queuecard from '../cards/Queuecard';
 
 export default class MusicQueue extends Component {
   render() {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { auth, database, storage } from '../firebase';
+import { auth, database, storage } from '../../firebase';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
 import { FaUpload } from 'react-icons/fa';

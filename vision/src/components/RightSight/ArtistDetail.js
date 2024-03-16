@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { database } from "../firebase";
+import { database } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import Resultcard from './cards/Resultcard'
 import { FaSearch } from "react-icons/fa";
+import ResultCard2 from "../cards/ResultCard2";
 
 const userRef = collection(database, "musicdata");
 
-const SearchScreen = () => {
+const ArtistDetail = (props) => {
     const [musicData, setMusicData] = useState([]);
     const [searchValue, setSearchValue] = useState('');
 
@@ -28,8 +28,7 @@ const SearchScreen = () => {
     }, []);
 
     const filteredMusicData = musicData.filter(item =>
-      item.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-      item.artist.toLowerCase().includes(searchValue.toLowerCase()) 
+      item.artist.toLowerCase().includes(props.name.toLowerCase()) 
       )
       
   
@@ -37,16 +36,6 @@ const SearchScreen = () => {
     return (
         <div>
             <div className="flex justify-items-end border-2 rounded-xl pr-3 border-white/60 focus:border-white mr-1">
-                <input
-                    type="text"
-                    className="w-full border-0 bg-white/0 border-gray-300 rounded-lg px-3 py-1 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Search..."
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                />
-                <button className="bg-blue-500 hover:bg-blue-600 text-white hover:scale-105 font-semi-bold p-2 rounded-md ml-2">
-                    <FaSearch />
-                </button>
             </div>
             <div className='mt-4 overflow-y-scroll' style={{
                 height: "89vh",
@@ -55,9 +44,12 @@ const SearchScreen = () => {
                 scrollbarWidth: "none", // For Firefox
                 msOverflowStyle: "none", // For Internet Explorer and Edge
             }}>
-              <div className="flex flex-wrap">
+              <div>
+                <h1 className="w-full items-center text-white text-xl ">
+                  {props.name}
+                </h1>
               {filteredMusicData.map((item) => (
-                    <Resultcard
+                   <ResultCard2
                         key={item.id}
                         image={item.thumbnail}
                         artist={item.artist}
@@ -72,4 +64,4 @@ const SearchScreen = () => {
     )
 }
 
-export default SearchScreen;
+export default ArtistDetail;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Popularalbumscard from "./Popularalbumscard";
+import Popularalbumscard from "../cards/Popularalbumscard";
 
 export default class Popularalbums extends Component {
   render() {

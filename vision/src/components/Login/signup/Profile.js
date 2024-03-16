@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { auth, database } from ".././firebase";
+import { auth, database } from "../../../firebase";
 import { useNavigate } from "react-router-dom";
 
 const userRef = collection(database, "userdata");

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Categories from './Categories';
 import Home from './Home';
-import Player from './Player';
-import { audios } from './audios';
+import Player from '../Player/Player';
+import { audios } from '../Player/audios';
 
 export default class Right extends Component {
   render() {
