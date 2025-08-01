@@ -5,7 +5,7 @@ import { FaPlay } from 'react-icons/fa'
 
 class Resultcard extends Component {
   render() {
-    const { image, title, artist, album, playSong } = this.props;
+    const { id, image, title, artist, album, playSong } = this.props;
     
  const playSong = () => {
   localStorage.setItem("currentIndex", id);
