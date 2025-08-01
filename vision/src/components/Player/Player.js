@@ -1,26 +1,40 @@
 import React, { useState, useRef, useEffect } from "react";
 import { database } from "../../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { CgPlayPause } from "react-icons/cg";
-import { GoUnmute } from "react-icons/go";
 import { FaHeart, FaPause, FaPlay } from "react-icons/fa";
+import { GoUnmute } from "react-icons/go";
 import { IoVolumeMute } from "react-icons/io5";
-import { ImLoop, ImNext, ImNext2, ImPrevious } from "react-icons/im";
+import { ImPrevious, ImNext } from "react-icons/im";
 import { BsRepeat, BsRepeat1 } from "react-icons/bs";
 
 const userRef = collection(database, "musicdata");
 
 const Player = () => {
+  const [musicData, setMusicData] = useState([]);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
-  const audioRef = useRef();
-  //
-  const [musicData, setMusicData] = useState([]);
-  const value = useLocalStorageSync("currentIndex1");
+  const audioRef = useRef(null);
+
+  const [localStorageIndex, setLocalStorageIndex] = useState(
+    localStorage.getItem("currentIndex1")
+  );
+
+  // Polling localStorage for changes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const current = localStorage.getItem("currentIndex1");
+      if (current !== localStorageIndex) {
+        setLocalStorageIndex(current);
+      }
+    }, 500);
+    return () => clearInterval(interval);
+  }, [localStorageIndex]);
+
+  // Fetch music data from Firestore
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,100 +45,114 @@ const Player = () => {
         }));
         setMusicData(data);
       } catch (error) {
-        console.error("Error getting documents: ", error);
+        console.error("Error fetching music data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Set audio source when song index or musicData changes
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio || musicData.length === 0) return;
+
+    const song = musicData[currentSongIndex];
+    if (!song) return;
+
+    audio.src = song.songlink;
+
+    if (isPlaying) {
+      audio.play().catch((err) => console.warn("Play error:", err));
+    }
+
+    const handleEnded = () => {
+      if (isLooping) {
+        audio.currentTime = 0;
+        audio.play();
+      } else {
+        nextSong();
       }
     };
 
-    fetchData();
+    audio.addEventListener("ended", handleEnded);
+    return () => audio.removeEventListener("ended", handleEnded);
+  }, [currentSongIndex, isPlaying, musicData, isLooping]);
+
+  // Update time/duration
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.ontimeupdate = () => {
+      setCurrentTime(audio.currentTime);
+      setDuration(audio.duration || 0);
+    };
   }, []);
-  //
-  // console.log(musicData);
 
-  const nextSong = () => {
-    setCurrentSongIndex((prevIndex) => {
-      let nextIndex = prevIndex + 1;
-      if (nextIndex >= musicData.length) nextIndex = 0;
-      return nextIndex;
-    });
-  };
+  // Loop control
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.loop = isLooping;
+    }
+  }, [isLooping]);
 
-  const prevSong = () => {
-    setCurrentSongIndex((prevIndex) => {
-      let nextIndex = prevIndex - 1;
-      if (nextIndex < 0) nextIndex = musicData.length - 1;
-      return nextIndex;
-    });
-  };
+  // Update currentSongIndex when localStorageIndex changes
+  useEffect(() => {
+    if (!localStorageIndex || musicData.length === 0) return;
+
+    const foundIndex = musicData.findIndex((el) => el.id === localStorageIndex);
+    if (foundIndex !== -1 && foundIndex !== currentSongIndex) {
+      setCurrentSongIndex(foundIndex);
+    }
+  }, [localStorageIndex, musicData]);
 
   const togglePlayPause = () => {
-    if (audioRef.current.paused) {
-      audioRef.current.play();
-      setIsPlaying(true);
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      audio.play().then(() => setIsPlaying(true));
     } else {
-      audioRef.current.pause();
+      audio.pause();
       setIsPlaying(false);
     }
   };
 
+  const nextSong = () => {
+    setCurrentSongIndex((prev) => (prev + 1) % musicData.length);
+  };
+
+  const prevSong = () => {
+    setCurrentSongIndex((prev) =>
+      prev === 0 ? musicData.length - 1 : prev - 1
+    );
+  };
+
   const handleVolumeChange = (e) => {
-    audioRef.current.volume = e.target.value;
+    if (audioRef.current) {
+      audioRef.current.volume = parseFloat(e.target.value);
+    }
   };
 
   const handleSeekUpdate = (e) => {
-    const seekTime = e.target.value;
-    audioRef.current.currentTime = seekTime;
-    setCurrentTime(seekTime);
-  };
-
-  const handleEnded = () => {
-    if (isLooping) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.play();
-    } else {
-      nextSong();
+    const seekTime = parseFloat(e.target.value);
+    if (audioRef.current) {
+      audioRef.current.currentTime = seekTime;
+      setCurrentTime(seekTime);
     }
   };
 
   const toggleMute = () => {
-    audioRef.current.muted = !audioRef.current.muted;
-    setIsMuted(audioRef.current.muted);
+    if (audioRef.current) {
+      audioRef.current.muted = !audioRef.current.muted;
+      setIsMuted(audioRef.current.muted);
+    }
   };
 
   const toggleLoop = () => {
-    setIsLooping(!isLooping);
+    setIsLooping((prev) => !prev);
   };
 
-  useEffect(() => {
-    audioRef.current.src = musicData[currentSongIndex]?.songlink;
-    if (isPlaying) audioRef.current.play();
-    audioRef.current.addEventListener("ended", handleEnded);
-    return () => {
-      audioRef.current.removeEventListener("ended", handleEnded);
-    };
-  }, [currentSongIndex, isPlaying]);
-
-  useEffect(() => {
-    const foundmusic = musicData.find(el => el.id === value );
-    if(foundmusic){
-       audioRef.current.src = foundmusic.songlink;
-       if (isPlaying) audioRef.current.play();
-       audioRef.current.addEventListener("ended", handleEnded);
-       return () => {
-        audioRef.current.removeEventListener("ended", handleEnded);
-      };
-    }
-  }, [value,isPlaying]);
-
-  useEffect(() => {
-    audioRef.current.ontimeupdate = () => {
-      setCurrentTime(audioRef.current.currentTime);
-      setDuration(audioRef.current.duration);
-    };
-  }, []);
-
-  useEffect(() => {
-    audioRef.current.loop = isLooping;
-  }, [isLooping]);
+  const currentSong = musicData[currentSongIndex];
 
   return (
     <div className="text-white bg-white/10 mt-1 p-2 rounded-xl text-xs">
@@ -136,72 +164,42 @@ const Player = () => {
         step="0.1"
         value={currentTime}
         onChange={handleSeekUpdate}
-        className="slider w-full "
+        className="slider w-full"
       />
 
-      <p>
-        {musicData[currentSongIndex]?.artist} -{" "}
-        {musicData[currentSongIndex]?.title}
-      </p>
+      <p>{currentSong?.artist} - {currentSong?.title}</p>
 
       <div className="flex justify-between">
         <img
-          src={musicData[currentSongIndex]?.thumbnail}
+          src={currentSong?.thumbnail}
+          alt="thumbnail"
           className="w-12 h-12 rounded-2xl"
         />
         <div className="py-2">
-        <button
-            className=" px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-            onClick={() => console.log("Like song")}
-          >
+          <button className="px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl">
             <FaHeart size="1.3rem" />
           </button>
-        <button
-            className={` px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${
-              isLooping ? "bg-green-500" : ""
-            }`}
+          <button
+            className={`px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${isLooping ? "bg-green-500" : ""}`}
             onClick={toggleLoop}
           >
-            {isLooping ? (
-              <BsRepeat1 size="1.3rem" />
-            ) : (
-              <BsRepeat size="1.3rem" />
-            )}
+            {isLooping ? <BsRepeat1 size="1.3rem" /> : <BsRepeat size="1.3rem" />}
           </button>
-          <button
-            className=" px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-            onClick={prevSong}
-          >
+          <button className="px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl" onClick={prevSong}>
             <ImPrevious size="1.3rem" />
           </button>
-          <button
-            className=" px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-            onClick={togglePlayPause}
-          >
+          <button className="px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl" onClick={togglePlayPause}>
             {isPlaying ? <FaPause size="1.3rem" /> : <FaPlay size="1.3rem" />}
           </button>
-          <button
-            className=" px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
-            onClick={nextSong}
-          >
+          <button className="px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl" onClick={nextSong}>
             <ImNext size="1.3rem" />
           </button>
-
-          
           <button
-            className={` px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${
-              isMuted ? "bg-red-500" : ""
-            }`}
+            className={`px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${isMuted ? "bg-red-500" : ""}`}
             onClick={toggleMute}
           >
-            {isMuted ? (
-              <GoUnmute size="1.3rem" />
-            ) : (
-              <IoVolumeMute size="1.3rem" />
-            )}
+            {isMuted ? <GoUnmute size="1.3rem" /> : <IoVolumeMute size="1.3rem" />}
           </button>
-          {/* Add a button for liking the song */}
-          
         </div>
         <input
           type="range"

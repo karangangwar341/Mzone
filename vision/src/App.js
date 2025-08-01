@@ -7,6 +7,7 @@ import Profile from './components/Login/signup/Profile';
 
 
 function App() {
+  localStorage.setItem("currentIndex1",0);
   return (
     <div className="App flex flex-row justify-center">
       <Router>
