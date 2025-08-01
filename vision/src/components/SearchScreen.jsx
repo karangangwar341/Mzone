@@ -59,6 +59,7 @@ const SearchScreen = () => {
               {filteredMusicData.map((item) => (
                     <Resultcard
                         key={item.id}
+                        id ={item.id}
                         image={item.thumbnail}
                         artist={item.artist}
                         title={item.title}
