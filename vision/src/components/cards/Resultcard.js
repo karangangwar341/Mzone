@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import { FaPlay } from 'react-icons/fa'
 
+ 
+
 class Resultcard extends Component {
   render() {
     const { image, title, artist, album, playSong } = this.props;
+    
+ const playSong = () => {
+  localStorage.setItem("currentIndex", id);
+};
 
     return (
       <div className="bg-white/10 hover:bg-white/20 focus:bg-white/30 text-white/80 w-44 rounded-md justify-between pb-2 mr-2 mb-2 text-xs" onClick={playSong}>
