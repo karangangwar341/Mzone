@@ -95,7 +95,7 @@ const Sidebar = () => {
         <aside className="Sidebar m-1 fixed  pr-2  flex flex-col bg-sidebarc/20 text-center text-white pt-6 pb-2 pl-2 rounded-3xl transition-transform " style={{height: '99vh', width: '24vh' }}>
           <div className="flex flex-col items-center justify-start flex-grow">
             <h1 className="font-semibold text-3xl text-white/80 mb-16 top-2 hover:scale-110 transition-transform">
-              mzone
+              mzonee
             </h1>
             <nav className="flex flex-col space-y-2">
               <button onClick={handleNavigatehome} className="w-full justify-evenly text-white/80 flex flex-row hover:bg-white/80 hover:text-texthover  hover:scale-105 transition-transform rounded-lg p-2">
