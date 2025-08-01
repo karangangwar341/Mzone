@@ -51,6 +51,7 @@ const ArtistDetail = (props) => {
               {filteredMusicData.map((item) => (
                    <ResultCard2
                         key={item.id}
+                        id={item.id}
                         image={item.thumbnail}
                         artist={item.artist}
                         title={item.title}

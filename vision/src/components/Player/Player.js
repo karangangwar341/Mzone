@@ -1,13 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import { database } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { FaHeart, FaPause, FaPlay } from "react-icons/fa";
+import {
+  collection,
+  getDocs,
+  setDoc,
+  doc,
+  serverTimestamp,
+} from "firebase/firestore";
+import {
+  FaHeart,
+  FaPause,
+  FaPlay,
+} from "react-icons/fa";
 import { GoUnmute } from "react-icons/go";
 import { IoVolumeMute } from "react-icons/io5";
 import { ImPrevious, ImNext } from "react-icons/im";
 import { BsRepeat, BsRepeat1 } from "react-icons/bs";
 
-const userRef = collection(database, "musicdata");
+const musicCollection = collection(database, "musicdata");
+const recentlyPlayedCollection = "recentlyPlayed"; // Firebase collection name
 
 const Player = () => {
   const [musicData, setMusicData] = useState([]);
@@ -23,7 +34,7 @@ const Player = () => {
     localStorage.getItem("currentIndex1")
   );
 
-  // Polling localStorage for changes
+  // Poll localStorage for changes
   useEffect(() => {
     const interval = setInterval(() => {
       const current = localStorage.getItem("currentIndex1");
@@ -38,7 +49,7 @@ const Player = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const querySnapshot = await getDocs(userRef);
+        const querySnapshot = await getDocs(musicCollection);
         const data = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -78,7 +89,7 @@ const Player = () => {
     return () => audio.removeEventListener("ended", handleEnded);
   }, [currentSongIndex, isPlaying, musicData, isLooping]);
 
-  // Update time/duration
+  // Time and duration updates
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -88,14 +99,13 @@ const Player = () => {
     };
   }, []);
 
-  // Loop control
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.loop = isLooping;
     }
   }, [isLooping]);
 
-  // Update currentSongIndex when localStorageIndex changes
+  // Handle index from localStorage
   useEffect(() => {
     if (!localStorageIndex || musicData.length === 0) return;
 
@@ -103,6 +113,23 @@ const Player = () => {
     if (foundIndex !== -1 && foundIndex !== currentSongIndex) {
       setCurrentSongIndex(foundIndex);
     }
+
+    // Add to recently played in Firebase
+    const pushToRecentlyPlayed = async () => {
+      const song = musicData.find((el) => el.id === localStorageIndex);
+      if (!song) return;
+
+      try {
+        await setDoc(doc(database, recentlyPlayedCollection, song.id), {
+          ...song,
+          playedAt: serverTimestamp(),
+        });
+      } catch (err) {
+        console.error("Error updating recently played:", err);
+      }
+    };
+
+    pushToRecentlyPlayed();
   }, [localStorageIndex, musicData]);
 
   const togglePlayPause = () => {
