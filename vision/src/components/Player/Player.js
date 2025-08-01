@@ -20,7 +20,7 @@ const Player = () => {
   const audioRef = useRef();
   //
   const [musicData, setMusicData] = useState([]);
-
+  const value = useLocalStorageSync("currentIndex1");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -102,6 +102,18 @@ const Player = () => {
       audioRef.current.removeEventListener("ended", handleEnded);
     };
   }, [currentSongIndex, isPlaying]);
+
+  useEffect(() => {
+    const foundmusic = musicData.find(el => el.id === value );
+    if(foundmusic){
+       audioRef.current.src = foundmusic.songlink;
+       if (isPlaying) audioRef.current.play();
+       audioRef.current.addEventListener("ended", handleEnded);
+       return () => {
+        audioRef.current.removeEventListener("ended", handleEnded);
+      };
+    }
+  }, [value,isPlaying]);
 
   useEffect(() => {
     audioRef.current.ontimeupdate = () => {
