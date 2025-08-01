@@ -7,12 +7,12 @@ class Resultcard extends Component {
   render() {
     const { id, image, title, artist, album, playSong } = this.props;
     
- const playSong = () => {
+ const playSongss = () => {
   localStorage.setItem("currentIndex1", id);
 };
 
     return (
-      <div className="bg-white/10 hover:bg-white/20 focus:bg-white/30 text-white/80 w-44 rounded-md justify-between pb-2 mr-2 mb-2 text-xs" onClick={playSong}>
+      <div className="bg-white/10 hover:bg-white/20 focus:bg-white/30 text-white/80 w-44 rounded-md justify-between pb-2 mr-2 mb-2 text-xs" onClick={playSongss}>
         <img
           src={image ? image : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY-lM3ktguFHXGQ1NsoIgFeT8_qVQPT6yw9aiv3JXyvQ&s"}
           alt="album"
