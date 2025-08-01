@@ -8,7 +8,7 @@ class Resultcard extends Component {
     const { id, image, title, artist, album, playSong } = this.props;
     
  const playSong = () => {
-  localStorage.setItem("currentIndex", id);
+  localStorage.setItem("currentIndex1", id);
 };
 
     return (
