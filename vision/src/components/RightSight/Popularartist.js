@@ -57,7 +57,7 @@ const Popularartist = () => {
 
  return (
     <div className="mt-2 ">
-      <h1  onClick={() => handleArtistback()} className="text-xl text-left text-white/80 ">Popular Artists</h1>
+      <h1  onClick={() => handleArtistback()} className="text-xl text-left ">Popular Artists</h1>
       <div
         className=" flex flex-wrap justify-start overflow-y-scroll"
         style={{

@@ -11,8 +11,13 @@ export default class SidebarR extends Component {
         w-1 hover:w-64 md:hover:w-1/4 
         m-1 flex flex-col 
         h-screen
-        bg-sidebarc/20 text-center text-white  backdrop-blur-lg 
-        pt-6 pb-2  px-2 bg-black/30 rounded-3xl overflow-hidden"
+        bg-sidebarc/20 text-center text-white   
+        
+        text-white/0 md:text-white/80 hover:text-white/80
+
+
+        backdrop-blur-lg md:backdrop-blur-none 
+        pt-6 pb-2  pl-2  bg-black/30 md:bg-black/10 rounded-3xl overflow-hidden"
       >
         <Popularartist />
         <MusicQueue />

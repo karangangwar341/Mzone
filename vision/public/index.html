@@ -29,32 +29,37 @@
     <style>
       /* Make the body take up the full viewport height */
       body {
-          margin:  0;
-          height:  100vh;
-          overflow: hidden;
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
       }
-
-      /* Position the video element absolutely and cover the entire body */
+    
+      /* Position the video element absolutely and zoom it to fill the entire screen */
       video#background-video {
-          position: fixed;
-          right:  0;
-          bottom:  0;
-          min-width:  100%;
-          min-height:  100%;
-          z-index: -1;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        z-index: -1;
+    
+        /* Zoom-in effect */
+        transform: scale(1.1); /* You can adjust the scale value if you want more or less zoom */
+        transform-origin: center center;
       }
-
+    
       /* Content container */
       .content {
-          position: relative;
-          z-index:  1;
-          /* Other styling for your content */
+        position: relative;
+        z-index: 1;
+        /* Other styling for your content */
       }
-  </style>
+    </style>
   </head>
   <body>
     <video id="background-video" autoplay loop muted playsinline>
-      <source src="bg-video.mp4" type="video/mp4">
+      <source src="bg-video.mp4" class="aspect-auto" type="video/mp4">
       Your browser does not support the video tag.
   </video>
     <noscript>You need to enable JavaScript to run this app.</noscript>

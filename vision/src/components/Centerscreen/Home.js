@@ -6,7 +6,7 @@ import SearchScreen from '../SearchScreen';
 
 const Home = ({ homecontent }) => {
   return (
-    <div className='px-2 mt-2 mx-1'>
+    <div className='px-1 mt-2 mx-1'>
       {homecontent === 'Home' && (
         <div>
           <Popularalbums />
