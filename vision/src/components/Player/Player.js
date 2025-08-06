@@ -7,11 +7,7 @@ import {
   doc,
   serverTimestamp,
 } from "firebase/firestore";
-import {
-  FaHeart,
-  FaPause,
-  FaPlay,
-} from "react-icons/fa";
+import { FaHeart, FaPause, FaPlay } from "react-icons/fa";
 import { GoUnmute } from "react-icons/go";
 import { IoVolumeMute } from "react-icons/io5";
 import { ImPrevious, ImNext } from "react-icons/im";
@@ -116,6 +112,7 @@ const Player = () => {
 
     // Add to recently played in Firebase
     const pushToRecentlyPlayed = async () => {
+      console.log("running");
       const song = musicData.find((el) => el.id === localStorageIndex);
       if (!song) return;
 
@@ -184,17 +181,33 @@ const Player = () => {
   return (
     <div className="text-white bg-white/10 mt-1 p-2 rounded-xl text-xs">
       <audio ref={audioRef} />
-      <input
-        type="range"
-        min="0"
-        max={duration}
-        step="0.1"
-        value={currentTime}
-        onChange={handleSeekUpdate}
-        className="slider w-full"
-      />
+      <div className="flex w-full">
+        <button
+          className="px-3 sm:hidden py-1 mx-1 hover:bg-white/10 rounded-3xl"
+          onClick={prevSong}
+        >
+          <ImPrevious size="1.3rem" />
+        </button>
 
-      <p>{currentSong?.artist} - {currentSong?.title}</p>
+        <input
+          type="range"
+          min="0"
+          max={duration}
+          step="0.1"
+          value={currentTime}
+          onChange={handleSeekUpdate}
+          className="slider w-full"
+        />
+        <button
+          className="px-3 py-1 sm:hidden mx-1 hover:bg-white/10 rounded-3xl"
+          onClick={nextSong}
+        >
+          <ImNext size="1.3rem" />
+        </button>
+      </div>
+      <p>
+        {currentSong?.artist} - {currentSong?.title}
+      </p>
 
       <div className="flex justify-between">
         <img
@@ -207,25 +220,46 @@ const Player = () => {
             <FaHeart size="1.3rem" />
           </button>
           <button
-            className={`px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${isLooping ? "bg-green-500" : ""}`}
+            className={`px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${
+              isLooping ? "bg-green-500" : ""
+            }`}
             onClick={toggleLoop}
           >
-            {isLooping ? <BsRepeat1 size="1.3rem" /> : <BsRepeat size="1.3rem" />}
+            {isLooping ? (
+              <BsRepeat1 size="1.3rem" />
+            ) : (
+              <BsRepeat size="1.3rem" />
+            )}
           </button>
-          <button className="px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl" onClick={prevSong}>
+          <button
+            className="hidden sm:inline-flex px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={prevSong}
+          >
             <ImPrevious size="1.3rem" />
           </button>
-          <button className="px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl" onClick={togglePlayPause}>
+          <button
+            className="px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={togglePlayPause}
+          >
             {isPlaying ? <FaPause size="1.3rem" /> : <FaPlay size="1.3rem" />}
           </button>
-          <button className="px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl" onClick={nextSong}>
+          <button
+            className="hidden sm:inline-flex px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl"
+            onClick={nextSong}
+          >
             <ImNext size="1.3rem" />
           </button>
           <button
-            className={`px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${isMuted ? "bg-red-500" : ""}`}
+            className={`px-3 py-1 mx-1 hover:bg-white/10 rounded-3xl ${
+              isMuted ? "bg-red-500" : ""
+            }`}
             onClick={toggleMute}
           >
-            {isMuted ? <GoUnmute size="1.3rem" /> : <IoVolumeMute size="1.3rem" />}
+            {isMuted ? (
+              <GoUnmute size="1.3rem" />
+            ) : (
+              <IoVolumeMute size="1.3rem" />
+            )}
           </button>
         </div>
         <input
@@ -234,7 +268,7 @@ const Player = () => {
           max="1"
           step="0.01"
           onChange={handleVolumeChange}
-          className="slider"
+          className="slider sm:rotate-0 -rotate-90 w-16 sm:w-24 md:w-32"
         />
       </div>
     </div>
