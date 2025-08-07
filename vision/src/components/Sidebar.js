@@ -91,16 +91,15 @@ const Sidebar = () => {
     return <p>Loading...</p>;
   }
   return (
-    <div className="h-screen left-0 absolute md:relative items-center overflow-hidden  w-3 group-hover:w-64 md:w-[12vw] ">
+    <div className="h-screen z-40 shadow-sm left-0 absolute md:relative items-center overflow-hidden  w-3 group-hover:w-64 md:w-[12vw] ">
       <aside
         className="Sidebar transition-all duration-300 ease-in-out 
   w-2 hover:w-36 md:hover:w-[11vw] md:w-[11vw] 
   m-1 fixed  flex flex-col 
-  h-screen
-  bg-sidebarc/20 text-center text-white  backdrop-blur-lg md:backdrop-blur-none 
-  pt-6 pb-2  rounded-3xl overflow-hidden bg-black/30 md:bg-black/10"
+  h-screen text-center text-white  backdrop-blur-lg md:backdrop-blur-none 
+  pt-6 pb-2  rounded-3xl overflow-hidden  md:bg-black/10"
       >
-        <div className="flex flex-col items-center text-white/0 md:text-white/80 hover:text-white/80
+        <div className="flex flex-col md:bg-white/10  rounded-xl items-center text-white/0 md:text-white/80 hover:text-white/80
  justify-start flex-grow">
           <h1 className="font-semibold text-3xl  mb-16 top-2 hover:scale-110 transition-transform">
             mzone
@@ -108,7 +107,7 @@ const Sidebar = () => {
           <nav className="flex flex-col  space-y-2">
             <button
               onClick={handleNavigatehome}
-              className="w-full justify-evenly  flex flex-row hover:bg-white/80 hover:text-texthover  hover:scale-105 transition-transform rounded-lg p-2"
+              className="w-full justify-evenly  flex flex-row hover:bg-white/40 hover:border border border-white/0 hover:border-white/60 rounded-xl hover:text-texthover  hover:scale-105 transition-transformg px-3 py-1"
             >
               <div className="pt-2">
                 {" "}
@@ -118,7 +117,7 @@ const Sidebar = () => {
             </button>
             <button
               onClick={handleNavigatesearch}
-              className="w-full justify-evenly  flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2"
+              className="w-full justify-evenly  flex flex-row hover:bg-white/40 hover:border border border-white/0 hover:border-white/60 rounded-xl hover:text-texthover hover:scale-105 transition-transform  px-3 py-1"
             >
               <div className="pt-2">
                 {" "}
@@ -126,19 +125,19 @@ const Sidebar = () => {
               </div>{" "}
               <div className="py-1 px-2">Search</div>
             </button>
-            <button className="w-full justify-evenly  flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+            <button className="w-full justify-evenly  flex flex-row hover:bg-white/40 hover:border border border-white/0 hover:border-white/60 rounded-xl hover:text-texthover hover:scale-105 transition-transform  px-3 py-1">
               <div className="pt-2">
                 {" "}
                 <BiSolidPlaylist />
               </div>{" "}
               <div className="py-1 px-2">Playlists</div>
             </button>
-            {/* <button className="w-full justify-evenly  flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+            {/* <button className="w-full justify-evenly  flex flex-row hover:bg-white/40 hover:border border border-white/0 hover:border-white/60 rounded-xl hover:text-texthover hover:scale-105 transition-transform  px-3 py-1">
               <div className='pt-2'> <IoIosNotifications /></div> <div className='py-1 px-2'>Notifications</div>
               </button> */}
             <button
               onClick={handleNavigatemusic}
-              className="w-full justify-evenly  flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2"
+              className="w-full justify-evenly  flex flex-row hover:bg-white/40 hover:border border border-white/0 hover:border-white/60 rounded-xl hover:text-texthover hover:scale-105 transition-transform  px-3 py-1"
             >
               <div className="pt-2">
                 {" "}
@@ -146,7 +145,7 @@ const Sidebar = () => {
               </div>{" "}
               <div className="py-1 px-2">Upload</div>
             </button>
-            <button className="w-full justify-evenly  flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2">
+            <button className="w-full justify-evenly  flex flex-row hover:bg-white/40 hover:border border border-white/0 hover:border-white/60 rounded-xl hover:text-texthover hover:scale-105 transition-transform  px-3 py-1">
               <div className="pt-2">
                 {" "}
                 <IoSettings />
@@ -155,7 +154,7 @@ const Sidebar = () => {
             </button>
             <button
               onClick={handleLogout}
-              className="w-full justify-evenly  flex flex-row hover:bg-white/80 hover:text-texthover hover:scale-105 transition-transform rounded-lg p-2"
+              className="w-full justify-evenly  flex flex-row hover:bg-white/40 hover:border border border-white/0 hover:border-white/60 rounded-xl hover:text-texthover hover:scale-105 transition-transform  px-3 py-1"
             >
               <div className="pt-2">
                 {" "}

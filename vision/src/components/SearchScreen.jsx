@@ -44,7 +44,7 @@ const SearchScreen = () => {
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <button className="bg-blue-500 hover:bg-blue-600 text-white hover:scale-105 font-semi-bold p-2 rounded-md ml-2">
+                <button className=" hover:bg-blue-600 rounded-full text-white hover:scale-105 font-semi-bold p-2 ml-2">
                     <FaSearch />
                 </button>
             </div>
